@@ -13,18 +13,19 @@ const Content = (props) => {
   console.log(props)
   return (
     <div>
-     <Part name ={props.parts[0].name}  exercises ={props.parts[0].exercises} />
-     <Part name ={props.parts[1].name} exercises ={props.parts[1].exercises}/>
-     <Part name ={props.parts[2].name} exercises ={props.parts[2].exercises}/>
-    </div>
+    {props.parts.map((part, index) => ( //loop over each part in the array
+        <Part key={index} name={part.name} exercises={part.exercises} />
+      ))}  
+      </div>
   )
 }
 
 
 const Total = (props) => {
  // total nbr of exo
- console.log(props)
- return <p>Number of exercises {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}</p>
+ const totalExercises = props.parts.reduce( //reduce() goes through the array and adds up all exercises
+    (sum, part) => sum + part.exercises, 0) //sum starts at 0 (second argument of reduce).
+ return <p>Number of exercises {totalExercises} </p>
 }
 
 const App = () => {
